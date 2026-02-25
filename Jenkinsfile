@@ -10,6 +10,7 @@ pipeline {
         REGISTRY_CREDENTIALS = "dockerhub-credentials-id"
         KUBE_CONTEXT = "kind-kind"
         HELM_RELEASE = "myrelease"
+        HELM_NAMESPACE = "micro"
         HELM_CHART_PATH = "mychart"
     }
 
