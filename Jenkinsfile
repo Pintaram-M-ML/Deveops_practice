@@ -25,10 +25,10 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh """
-                docker build -t ${DOCKER_IMAGE_USER_SERVICE}:${DOCKER_TAG} .
-                docker build -t ${DOCKER_IMAGE_PRODUCT_SERVICE}:${DOCKER_TAG} .
-                docker build -t ${DOCKER_IMAGE_ORDER_SERVICE}:${DOCKER_TAG} .
-                docker build -t ${DOCKER_IMAGE_FRONTEND}:${DOCKER_TAG} .
+                docker build -t ${DOCKER_IMAGE_USER_SERVICE}:${DOCKER_TAG} ./user-service
+                docker build -t ${DOCKER_IMAGE_PRODUCT_SERVICE}:${DOCKER_TAG} ./product-service
+                docker build -t ${DOCKER_IMAGE_ORDER_SERVICE}:${DOCKER_TAG} ./order-service
+                docker build -t ${DOCKER_IMAGE_FRONTEND}:${DOCKER_TAG} ./frontend
                 """
             }
         }
