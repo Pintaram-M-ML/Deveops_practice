@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservices Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-cubes"></i> Microservices Dashboard</h1>
+                <p>Interact with User, Product, and Order Services</p>
+            </div>
+            <div class="health-status">
+                <div class="status-item" id="user-status">
+                    <i class="fas fa-circle"></i> User Service
+                </div>
+                <div class="status-item" id="product-status">
+                    <i class="fas fa-circle"></i> Product Service
+                </div>
+                <div class="status-item" id="order-status">
+                    <i class="fas fa-circle"></i> Order Service
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- User Service Section -->
+            <section class="service-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> User Service</h2>
+                    <span class="port-badge">Port: 4001</span>
+                </div>
+                
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="getUsers()">
+                        <i class="fas fa-list"></i> Get All Users
+                    </button>
+                    <button class="btn btn-secondary" onclick="showCreateUserForm()">
+                        <i class="fas fa-user-plus"></i> Create User
+                    </button>
+                </div>
+
+                <div id="create-user-form" class="form-container" style="display: none;">
+                    <h3>Create New User</h3>
+                    <input type="text" id="user-name" placeholder="Name" class="input-field">
+                    <input type="email" id="user-email" placeholder="Email" class="input-field">
+                    <button class="btn btn-success" onclick="createUser()">
+                        <i class="fas fa-save"></i> Save User
+                    </button>
+                    <button class="btn btn-cancel" onclick="hideCreateUserForm()">Cancel</button>
+                </div>
+
+                <div id="users-output" class="output-container"></div>
+            </section>
+
+            <!-- Product Service Section -->
+            <section class="service-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-box"></i> Product Service</h2>
+                    <span class="port-badge">Port: 4002</span>
+                </div>
+                
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="getProducts()">
+                        <i class="fas fa-list"></i> Get All Products
+                    </button>
+                    <button class="btn btn-secondary" onclick="showCreateProductForm()">
+                        <i class="fas fa-plus"></i> Create Product
+                    </button>
+                </div>
+
+                <div id="create-product-form" class="form-container" style="display: none;">
+                    <h3>Create New Product</h3>
+                    <input type="text" id="product-name" placeholder="Product Name" class="input-field">
+                    <input type="number" id="product-price" placeholder="Price" step="0.01" class="input-field">
+                    <input type="number" id="product-stock" placeholder="Stock" class="input-field">
+                    <button class="btn btn-success" onclick="createProduct()">
+                        <i class="fas fa-save"></i> Save Product
+                    </button>
+                    <button class="btn btn-cancel" onclick="hideCreateProductForm()">Cancel</button>
+                </div>
+
+                <div id="products-output" class="output-container"></div>
+            </section>
+
+            <!-- Order Service Section -->
+            <section class="service-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-shopping-cart"></i> Order Service</h2>
+                    <span class="port-badge">Port: 4003</span>
+                </div>
+                
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="getOrders()">
+                        <i class="fas fa-list"></i> Get All Orders
+                    </button>
+                    <button class="btn btn-secondary" onclick="showCreateOrderForm()">
+                        <i class="fas fa-cart-plus"></i> Create Order
+                    </button>
+                </div>
+
+                <div id="create-order-form" class="form-container" style="display: none;">
+                    <h3>Create New Order</h3>
+                    <input type="number" id="order-userId" placeholder="User ID" class="input-field">
+                    <input type="number" id="order-productId" placeholder="Product ID" class="input-field">
+                    <input type="number" id="order-quantity" placeholder="Quantity" class="input-field">
+                    <button class="btn btn-success" onclick="createOrder()">
+                        <i class="fas fa-save"></i> Create Order
+                    </button>
+                    <button class="btn btn-cancel" onclick="hideCreateOrderForm()">Cancel</button>
+                </div>
+
+                <div id="orders-output" class="output-container"></div>
+            </section>
+        </div>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
