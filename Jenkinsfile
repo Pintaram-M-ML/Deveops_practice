@@ -62,14 +62,15 @@ pipeline {
         stage('Helm Upgrade / Deploy') {
             steps {
                sh """
-                    helm upgrade --install ${HELM_RELEASE} ${HELM_CHART_PATH} \
-                        --namespace ${HELM_NAMESPACE} \
+                    helm upgrade --install myrelease mychart \
+                        --namespace micro \
                         --create-namespace \
-                        --set userService.image=${DOCKER_IMAGE_USER_SERVICE}:${DOCKER_TAG} \
-                        --set productService.image=${DOCKER_IMAGE_PRODUCT_SERVICE}:${DOCKER_TAG} \
-                        --set orderService.image=${DOCKER_IMAGE_ORDER_SERVICE}:${DOCKER_TAG} \
-                        --set frontend.image=${DOCKER_IMAGE_FRONTEND}:${DOCKER_TAG} \
-                        --kube-context ${KUBE_CONTEXT}
+                        --set userService.image=pintaram369/user-service:23 \
+                        --set productService.image=pintaram369/product-service:23 \
+                        --set orderService.image=pintaram369/order-service:23 \
+                        --set frontend.image=pintaram369/frontend:23 \
+                        --kube-context kind-kubeadm-kind
+
                     """
 
             }
