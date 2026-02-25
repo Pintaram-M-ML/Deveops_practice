@@ -8,9 +8,9 @@ pipeline {
         DOCKER_IMAGE_FRONTEND = "pintaram369/frontend"
         DOCKER_TAG   = "${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = "dockerhub-credentials-id"
-        KUBE_CONTEXT = "minikube"
-        HELM_RELEASE = "myapp"
-        HELM_CHART_PATH = "./helm-chart"
+        KUBE_CONTEXT = "kind-kind"
+        HELM_RELEASE = "myrelease"
+        HELM_CHART_PATH = "mychart"
     }
 
     stages {
@@ -18,14 +18,17 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/your-username/your-repo.git'
+                    url: 'https://github.com/Pintaram-M-ML/Deveops_practice.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 sh """
-                docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+                docker build -t ${DOCKER_IMAGE_USER_SERVICE}:${DOCKER_TAG} .
+                docker build -t ${DOCKER_IMAGE_PRODUCT_SERVICE}:${DOCKER_TAG} .
+                docker build -t ${DOCKER_IMAGE_ORDER_SERVICE}:${DOCKER_TAG} .
+                docker build -t ${DOCKER_IMAGE_FRONTEND}:${DOCKER_TAG} .
                 """
             }
         }
@@ -47,18 +50,27 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 sh """
-                docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
+                docker push ${DOCKER_IMAGE_USER_SERVICE}:${DOCKER_TAG}
+                docker push ${DOCKER_IMAGE_PRODUCT_SERVICE}:${DOCKER_TAG}
+                docker push ${DOCKER_IMAGE_ORDER_SERVICE}:${DOCKER_TAG}
+                docker push ${DOCKER_IMAGE_FRONTEND}:${DOCKER_TAG}
                 """
             }
         }
 
         stage('Helm Upgrade / Deploy') {
             steps {
-                sh """
-                helm upgrade --install ${HELM_RELEASE} ${HELM_CHART_PATH} \
-                --set image.repository=${DOCKER_IMAGE} \
-                --set image.tag=${DOCKER_TAG}
-                """
+               sh """
+                    helm upgrade --install ${HELM_RELEASE} ${HELM_CHART_PATH} \
+                        --namespace ${HELM_NAMESPACE} \
+                        --create-namespace \
+                        --set userService.image=${DOCKER_IMAGE_USER_SERVICE}:${DOCKER_TAG} \
+                        --set productService.image=${DOCKER_IMAGE_PRODUCT_SERVICE}:${DOCKER_TAG} \
+                        --set orderService.image=${DOCKER_IMAGE_ORDER_SERVICE}:${DOCKER_TAG} \
+                        --set frontend.image=${DOCKER_IMAGE_FRONTEND}:${DOCKER_TAG} \
+                        --kube-context ${KUBE_CONTEXT}
+                    """
+
             }
         }
     }
