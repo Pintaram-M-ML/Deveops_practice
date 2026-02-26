@@ -71,10 +71,10 @@ pipeline {
                 script {
                     echo "Loading Docker images into kind cluster..."
                     sh """
-                        kind load docker-image ${DOCKER_IMAGE_USER_SERVICE}:${DOCKER_TAG}
-                        kind load docker-image ${DOCKER_IMAGE_PRODUCT_SERVICE}:${DOCKER_TAG}
-                        kind load docker-image ${DOCKER_IMAGE_ORDER_SERVICE}:${DOCKER_TAG}
-                        kind load docker-image ${DOCKER_IMAGE_FRONTEND}:${DOCKER_TAG}
+                        kind load docker-image ${DOCKER_IMAGE_USER_SERVICE}:${DOCKER_TAG} --name kubeadm-kind
+                        kind load docker-image ${DOCKER_IMAGE_PRODUCT_SERVICE}:${DOCKER_TAG} --name kubeadm-kind
+                        kind load docker-image ${DOCKER_IMAGE_ORDER_SERVICE}:${DOCKER_TAG} --name kubeadm-kind
+                        kind load docker-image ${DOCKER_IMAGE_FRONTEND}:${DOCKER_TAG} --name kubeadm-kind
                     """
                 }
             }
