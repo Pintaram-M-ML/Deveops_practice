@@ -11,7 +11,7 @@ Manages user data and operations.
 - `GET /api/users` - Get all users
 - `GET /api/users/:id` - Get user by ID
 - `POST /api/users` - Create new user
-- `GET /health` - Health check hii
+- `GET /health` - Health check 
 
 ### 2. Product Service (Port 4002)
 Manages product catalog and inventory.
