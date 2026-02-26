@@ -1,6 +1,6 @@
 # Kubernetes Manifests for Microservices
 
-This directory contains individual Kubernetes deployment manifests for each service. hii
+This directory contains individual Kubernetes deployment manifests for each service. 
 
 ## Files
 
