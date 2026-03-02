@@ -37,10 +37,10 @@ services:
       periodSeconds: 5
     resources:
       limits:
-        cpu: 200m
+        cpu: 500m
         memory: 256Mi
       requests:
-        cpu: 100m
+        cpu: 200m
         memory: 128Mi
 
   productService:
@@ -72,10 +72,10 @@ services:
       periodSeconds: 5
     resources:
       limits:
-        cpu: 200m
+        cpu: 500m
         memory: 256Mi
       requests:
-        cpu: 100m
+        cpu: 200m
         memory: 128Mi
 
   orderService:
@@ -111,10 +111,10 @@ services:
       periodSeconds: 5
     resources:
       limits:
-        cpu: 200m
+        cpu: 500m
         memory: 256Mi
       requests:
-        cpu: 100m
+        cpu: 200m
         memory: 128Mi
 
   frontendService:
@@ -147,10 +147,10 @@ services:
       periodSeconds: 5
     resources:
       limits:
-        cpu: 200m
+        cpu: 500m
         memory: 256Mi
       requests:
-        cpu: 100m
+        cpu: 200m
         memory: 128Mi
 
 # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
